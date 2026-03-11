@@ -1,0 +1,235 @@
+/* =========================
+ADMIN PAGE
+========================= */
+
+.admin{
+padding:40px;
+color:white;
+}
+
+/* =========================
+NAVBAR
+========================= */
+
+.admin-nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.brand{
+font-size:22px;
+font-weight:700;
+color:white;
+}
+
+.brand span{
+color:#38bdf8;
+font-weight:500;
+}
+
+/* =========================
+HERO SECTION
+========================= */
+
+.admin-hero{
+text-align:center;
+margin-bottom:30px;
+}
+
+.admin-hero h1{
+font-size:34px;
+font-weight:700;
+margin-bottom:8px;
+}
+
+.admin-hero p{
+color:#94a3b8;
+font-size:16px;
+}
+
+/* =========================
+STATS BOXES
+========================= */
+
+.stats-container{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:30px;
+margin:40px 0;
+}
+
+.stat-card{
+background:#0f1f3d;
+padding:25px;
+border-radius:12px;
+width:220px;
+text-align:center;
+transition:0.3s;
+}
+
+.stat-card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 12px rgba(0,140,255,0.4);
+}
+
+.stat-card h3{
+margin-bottom:10px;
+font-weight:600;
+}
+
+.stat-card p{
+font-size:22px;
+font-weight:700;
+}
+
+/* =========================
+SECTION TITLES
+========================= */
+
+.section-title{
+text-align:center;
+margin-top:40px;
+margin-bottom:20px;
+font-size:24px;
+font-weight:700;
+}
+
+/* =========================
+TABLE
+========================= */
+
+.admin-table{
+width:80%;
+margin:auto;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+.admin-table th{
+padding:14px;
+text-align:left;
+font-weight:600;
+color:#cbd5f5;
+border-bottom:1px solid #334155;
+}
+
+.admin-table td{
+padding:14px;
+text-align:left;
+border-bottom:1px solid #1e293b;
+}
+
+.admin-table th:nth-child(4),
+.admin-table td:nth-child(4){
+text-align:center;
+}
+
+.admin-table th:nth-child(5),
+.admin-table td:nth-child(5){
+text-align:center;
+}
+
+/* =========================
+ROW HOVER EFFECT
+========================= */
+
+.admin-row{
+cursor:pointer;
+transition:0.2s;
+}
+
+.admin-row:hover{
+background:#132a54;
+transform:scale(1.01);
+}
+
+/* =========================
+BUTTONS
+========================= */
+
+.btn{
+background:#2d7df6;
+border:none;
+padding:8px 15px;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+.btn:hover
+
+.delete-btn{
+background:#ff4d4d;
+border:none;
+padding:6px 12px;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+.delete-btn:hover
+
+.view-btn{
+background:#22c55e;
+border:none;
+padding:6px 12px;
+color:white;
+border-radius:6px;
+cursor:pointer;
+margin-right:8px;
+}
+
+.view-btn:hover
+
+/* =========================
+PROFILE POPUP
+========================= */
+
+.modal-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.modal-card{
+background:#0b1b3a;
+padding:30px;
+border-radius:12px;
+width:350px;
+text-align:center;
+}
+
+.modal-avatar{
+width:70px;
+height:70px;
+border-radius:50%;
+background:#2d7df6;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+margin:auto;
+margin-bottom:15px;
+}
+
+.rating-breakdown{
+margin-top:15px;
+line-height:1.6;
+}
+
+.close-btn{
+margin-top:20px;
+background:#2d7df6;
+padding:8px 15px;
+border-radius:6px;
+cursor:pointer;
+}

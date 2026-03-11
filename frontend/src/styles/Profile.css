@@ -1,0 +1,130 @@
+/* PAGE BACKGROUND */
+.profile-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #0b1120);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+/* CARD */
+.profile-card {
+  width: 420px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+  color: white;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* AVATAR */
+.profile-avatar {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 20px auto;
+  background: linear-gradient(45deg, #6366f1, #38bdf8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+/* TITLE */
+.profile-card h2 {
+  margin-bottom: 25px;
+  color: #38bdf8;
+}
+
+/* FORM CONTAINER */
+.profile-form{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+/* LABELS */
+.profile-label{
+  font-size:14px;
+  font-weight:500;
+  color:#94a3b8;
+  margin-top:8px;
+  text-align:left;
+}
+
+/* INPUT FIELDS */
+.profile-form input,
+.profile-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: #1e293b;
+  color: white;
+  outline: none;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+/* PLACEHOLDER COLOR */
+.profile-form input::placeholder,
+.profile-form textarea::placeholder {
+  color: #94a3b8;
+}
+
+/* FOCUS EFFECT */
+.profile-form input:focus,
+.profile-form textarea:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4);
+}
+
+/* BIO BOX */
+.profile-form textarea{
+  min-height:90px;
+  resize:none;
+}
+
+/* SAVE BUTTON */
+.profile-card button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(45deg, #6366f1, #38bdf8);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: 0.3s;
+}
+
+.profile-card button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* SUCCESS MESSAGE */
+.success-msg{
+  color:#4ade80;
+  font-size:14px;
+  margin-bottom:10px;
+}
+
+/* BACK BUTTON */
+.back-btn {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  color: #38bdf8;
+}
