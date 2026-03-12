@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export default axios.create({
- baseURL: "http://localhost:5000/api"//
-  //baseURL: "https://peertopeer-1-tx2n.onrender.com"//
+ baseURL: "http://localhost:5000/api"
+
 });
