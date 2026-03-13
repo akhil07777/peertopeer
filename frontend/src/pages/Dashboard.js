@@ -40,11 +40,15 @@ function Dashboard() {
     "SQL",
   ];
 
-  const handleLogout = () => {
+ const handleLogout = () => {
+  const confirmLogout = window.confirm("Are you sure you want to logout?");
+  
+  if (confirmLogout) {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     navigate("/login");
-  };
+  }
+};
 
   const formatSkills = (skills) => {
     if (!skills) return "N/A";
