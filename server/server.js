@@ -14,11 +14,10 @@ dns.setServers(["1.1.1.1", "8.8.8.8"]);
 const app = express();
 
 // Middleware
+const cors = require("cors");
+
 app.use(cors({
-  origin: [
-    "http://localhost:3000", 
-    "https://peertopeer-qz72.vercel.app"   // change this to your frontend URL after deployment
-  ],
+  origin: true,
   credentials: true
 }));
 
