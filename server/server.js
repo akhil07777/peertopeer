@@ -17,7 +17,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:3000", 
-    "https:p2p-5qd2.onrender.com"   // change this to your frontend URL after deployment
+    "https://p2p-5qd2.onrender.com"   // change this to your frontend URL after deployment
   ],
   credentials: true
 }));
