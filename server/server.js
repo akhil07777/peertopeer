@@ -14,7 +14,7 @@ dns.setServers(["1.1.1.1", "8.8.8.8"]);
 const app = express();
 
 // Middleware
-const cors = require("cors");
+
 
 app.use(cors({
   origin: true,
