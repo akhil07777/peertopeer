@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
 
 function Home() {
   const navigate = useNavigate();
+
+  // Check login status when page loads
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      navigate("/dashboard"); // Skip landing page if already logged in
+    }
+  }, [navigate]);
 
   return (
     <div className="home">
@@ -11,7 +20,6 @@ function Home() {
         <h2 className="brand">
           SkillSwap <span>– P2P SkillExchanger</span>
         </h2>
-       
       </div>
 
       <div className="hero">
@@ -29,7 +37,8 @@ function Home() {
           <button className="primary" onClick={() => navigate("/register")}>
             Get Started
           </button>
-          <button className="secondary">
+
+          <button className="secondary" onClick={() => navigate("/login")}>
             Explore Community
           </button>
         </div>
