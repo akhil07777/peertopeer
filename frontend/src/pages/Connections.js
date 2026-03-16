@@ -105,18 +105,6 @@ setUnread(prev=>({
 
 /* CLEAR BADGE */
 
-session.on("conversationSelected",event=>{
-
-const convoId = event.conversation.id;
-
-setUnread(prev=>{
-const updated={...prev};
-delete updated[convoId];
-return updated;
-});
-
-});
-
 });
 
 },[]);
@@ -290,8 +278,10 @@ onClick={()=>navigate("/dashboard")}
 
 {connections.map(c=>{
 
+if(!c.fromUser || !c.toUser) return null;
+
 const user =
-c.fromUser._id===currentUser._id
+c.fromUser._id === currentUser._id
 ? c.toUser
 : c.fromUser;
 
@@ -309,12 +299,12 @@ onClick={()=>setChatUser(user)}
 >
 
 <div className="search-avatar">
-{user.name[0].toUpperCase()}
+{user?.name ? user.name[0].toUpperCase() : "U"}
 </div>
 
 <div className="chat-user-info">
 
-<strong>{user.name}</strong>
+<strong>{user?.name || "Unknown User"}</strong>
 
 <p className="connected-text">
 🟢 Connected
