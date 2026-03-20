@@ -36,6 +36,7 @@ app.use("/api/feedback", feedbackRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/admin", adminRoutes);
 
+console.log("MONGO_URI:", process.env.MONGO_URI);
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
