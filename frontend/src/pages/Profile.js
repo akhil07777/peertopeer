@@ -136,14 +136,21 @@ function Profile() {
   />
 
   {/* BIO */}
-  <label className="profile-label">Bio</label>
-  <textarea
-    name="bio"
-    value={form.bio}
-    onChange={handleChange}
-    placeholder="Tell something about yourself"
-  />
+<label className="profile-label">Bio (Optional)</label>
+<textarea
+  name="bio"
+  value={form.bio}
+  onChange={handleChange}
+  placeholder={`Write about yourself (optional)...
 
+You can also add details (one per line):
+
+Email - abc@gmail.com
+GitHub - github.com/username
+LinkedIn - linkedin.com/in/username
+
+Tip: Use "Label - Value" format (Label - Value)`}
+/>
 </div>
 
         {/* 🔥 IMPORTANT FIX HERE */}
