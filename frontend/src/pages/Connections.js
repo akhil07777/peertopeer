@@ -65,61 +65,75 @@ headers:{Authorization:`Bearer ${token}`}
 setConnections(prev=>prev.filter(c=>c._id!==id));
 
 };
-
-
 /* INITIALIZE TALKJS */
-useEffect(()=>{
 
-Talk.ready.then(()=>{
+useEffect(() => {
+
+if (!currentUser) return;
+
+Talk.ready.then(() => {
+
+```
 const me = new Talk.User({
   id: String(currentUser?._id || "guest"),
   name: currentUser?.name?.trim() || "User",
   email: currentUser?.email || "user@email.com"
 });
 
-
 const session = new Talk.Session({
-appId:"tbJhxgLH",
-me:me
+  appId: "tbJhxgLH",
+  me: me
 });
 
 sessionRef.current = session;
 
-session.on("message",event=>{
-if(event.data.senderId !== currentUser._id){
-const convoId = event.data.conversation.id;
-setUnread(prev=>({
-...prev,
-[convoId]:(prev[convoId] || 0)+1
-}));
-}
+/* MESSAGE LISTENER */
+
+session.on("message", (event) => {
+
+  const senderId = String(event.data.senderId);
+  const myId = String(currentUser?._id);
+
+  if (senderId !== myId) {
+    const convoId = event.data.conversation.id;
+
+    setUnread(prev => ({
+      ...prev,
+      [convoId]: (prev[convoId] || 0) + 1
+    }));
+  }
+
 });
+```
 
 });
 
-// ✅ ADD THIS CLEANUP
+/* CLEANUP */
+
 return () => {
-if(sessionRef.current){
+if (sessionRef.current) {
 sessionRef.current.destroy();
+sessionRef.current = null;
 }
 };
 
-},[]);
+}, []);
 
 /* OPEN CHAT */
 
-useEffect(()=>{
+useEffect(() => {
 
-if(!chatUser || !sessionRef.current) return;
+if (!chatUser || !sessionRef.current) return;
 
 const me = sessionRef.current.me;
+
 const other = new Talk.User({
-  id: String(chatUser?._id || "unknown"),
-  name: chatUser?.name?.trim() || "User",
-  email: chatUser?.email || "user@email.com"
+id: String(chatUser?._id || "unknown"),
+name: chatUser?.name?.trim() || "User",
+email: chatUser?.email || "[user@email.com](mailto:user@email.com)"
 });
 
-const conversationId = Talk.oneOnOneId(me,other);
+const conversationId = Talk.oneOnOneId(me, other);
 
 const conversation = sessionRef.current.getOrCreateConversation(conversationId);
 
@@ -130,42 +144,43 @@ const chatbox = sessionRef.current.createChatbox();
 
 chatbox.select(conversation);
 
-// ✅ CLEAR OLD CHAT FIRST
-if(chatboxRef.current){
+/* CLEAR OLD CHAT */
+
+if (chatboxRef.current) {
 chatboxRef.current.innerHTML = "";
+chatbox.mount(chatboxRef.current);
 }
 
-chatbox.mount(chatboxRef.current);
+/* RESET UNREAD */
 
-// unread reset
-setUnread(prev=>{
-const updated={...prev};
+setUnread(prev => {
+const updated = { ...prev };
 delete updated[conversationId];
 return updated;
 });
 
-},[chatUser]);
-
+}, [chatUser]);
 
 /* STAR COMPONENT */
 
-const StarRating = ({value,onChange}) => {
+const StarRating = ({ value, onChange }) => {
 
-return(
+return (
+
 
 <div className="stars">
 
-{[1,2,3,4,5].map(star=>(
+  {[1, 2, 3, 4, 5].map(star => (
 
-<span
-key={star}
-className={star<=value ? "star active":"star"}
-onClick={()=>onChange(star)}
->
-★
-</span>
+    <span
+      key={star}
+      className={star <= value ? "star active" : "star"}
+      onClick={() => onChange(star)}
+    >
+      ★
+    </span>
 
-))}
+  ))}
 
 </div>
 

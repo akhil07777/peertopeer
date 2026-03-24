@@ -283,7 +283,9 @@ useEffect(() => {
 
       {/* ── HERO ── */}
       <div className="dash-hero">
-        <h1>Welcome back, {user.name || "User"} 👋</h1>
+       <h1>
+Welcome back, {user.name?.trim() || "User"} 👋
+</h1>
         <p>Find skills, connect with peers, and grow together.</p>
 
         {/*
