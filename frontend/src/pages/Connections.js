@@ -73,7 +73,7 @@ if (!currentUser) return;
 
 Talk.ready.then(() => {
 
-```
+
 const me = new Talk.User({
   id: String(currentUser?._id || "guest"),
   name: currentUser?.name?.trim() || "User",
@@ -104,7 +104,7 @@ session.on("message", (event) => {
   }
 
 });
-```
+
 
 });
 
