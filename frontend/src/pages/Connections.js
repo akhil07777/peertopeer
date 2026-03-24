@@ -68,7 +68,6 @@ setConnections(prev=>prev.filter(c=>c._id!==id));
 
 
 /* INITIALIZE TALKJS */
-
 useEffect(()=>{
 
 Talk.ready.then(()=>{
@@ -86,29 +85,26 @@ me:me
 
 sessionRef.current = session;
 
-/* MESSAGE LISTENER */
-
 session.on("message",event=>{
-
 if(event.data.senderId !== currentUser._id){
-
 const convoId = event.data.conversation.id;
-
 setUnread(prev=>({
 ...prev,
 [convoId]:(prev[convoId] || 0)+1
 }));
-
 }
+});
 
 });
 
-/* CLEAR BADGE */
-
-});
+// ✅ ADD THIS CLEANUP
+return () => {
+if(sessionRef.current){
+sessionRef.current.destroy();
+}
+};
 
 },[]);
-
 
 /* OPEN CHAT */
 
@@ -133,8 +129,15 @@ conversation.setParticipant(other);
 const chatbox = sessionRef.current.createChatbox();
 
 chatbox.select(conversation);
+
+// ✅ CLEAR OLD CHAT FIRST
+if(chatboxRef.current){
+chatboxRef.current.innerHTML = "";
+}
+
 chatbox.mount(chatboxRef.current);
 
+// unread reset
 setUnread(prev=>{
 const updated={...prev};
 delete updated[conversationId];
