@@ -24,6 +24,8 @@ function Dashboard() {
   const [isSending,      setIsSending]      = useState(false);
   const [inputWidth,     setInputWidth]     = useState(0);
   const [inputLeft,      setInputLeft]      = useState(0);
+  const [showNotifications, setShowNotifications] = useState(false);
+const unreadCount = notifications.filter(n => !n.isRead).length;
 
   const skillOptions = [
     "C", "C++", "CSS", "Cyber Security",
@@ -219,6 +221,12 @@ function Dashboard() {
           <button className="request-btn" onClick={() => navigate("/requests")}>
             Requests {requestCount > 0 && `(${requestCount})`}
           </button>
+          <button
+  className="request-btn"
+  onClick={() => setShowNotifications(!showNotifications)}
+>
+  🔔 {unreadCount > 0 && `(${unreadCount})`}
+</button>
           <button className="request-btn" onClick={() => navigate("/connections")}>
             Connections
           </button>
@@ -356,6 +364,39 @@ function Dashboard() {
           <p style={{ marginTop: "20px", color: "#94a3b8" }}>No users found</p>
         )}
       </div>
+
+      {showNotifications && (
+  <div style={{
+    position: "absolute",
+    right: "20px",
+    top: "70px",
+    background: "#1e293b",
+    padding: "10px",
+    borderRadius: "10px",
+    width: "280px",
+    maxHeight: "300px",
+    overflowY: "auto",
+    zIndex: 1000
+  }}>
+    <h4>Notifications</h4>
+
+    {notifications.length === 0 ? (
+      <p>No notifications</p>
+    ) : (
+      notifications.map(n => (
+        <div
+          key={n._id}
+          style={{
+            padding: "8px",
+            borderBottom: "1px solid #334155"
+          }}
+        >
+          {n.message}
+        </div>
+      ))
+    )}
+  </div>
+)}
 
       {/* ── USER PROFILE POPUP ── */}
       {selectedUser && (

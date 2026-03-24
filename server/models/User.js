@@ -34,8 +34,13 @@ const userSchema = new mongoose.Schema({
     default: "" 
   },
 
-  /* ADMIN ROLE */
+  // ✅ NEW FIELD (IMPORTANT)
+  isApproved: {
+    type: Boolean,
+    default: false
+  },
 
+  // ADMIN ROLE
   role: {
     type: String,
     enum: ["user","admin"],

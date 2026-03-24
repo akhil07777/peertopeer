@@ -7,6 +7,9 @@ const dns = require("dns");
 const notificationRoutes = require("./routes/notificationRoutes");
 const feedbackRoutes = require("./routes/feedback");
 const adminRoutes = require("./routes/adminRoutes");
+const notificationRoutes = require("./routes/notificationRoutes");
+
+
 
 // Optional DNS fix
 dns.setServers(["1.1.1.1", "8.8.8.8"]);

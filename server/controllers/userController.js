@@ -2,7 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-/* ---------------- REGISTER ---------------- */
+/* REGISTER */
 const register = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -13,17 +13,20 @@ const register = async (req, res) => {
 
     const user = await User.create({
       email: cleanEmail,
-      password: hashed
+      password: hashed,
+      isApproved: false
     });
 
-    res.json(user);
+    res.json({
+      message: "Registered successfully. Wait for admin approval"
+    });
 
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-/* ---------------- LOGIN ---------------- */
+/* LOGIN */
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -36,6 +39,12 @@ const login = async (req, res) => {
       return res.status(400).json({ message: "User not found" });
     }
 
+    if (!user.isApproved) {
+      return res.status(403).json({
+        message: "Your account is waiting for admin approval"
+      });
+    }
+
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
@@ -43,17 +52,22 @@ const login = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user._id },
+      { id: user._id, role: user.role },
       process.env.JWT_SECRET
     );
 
-    res.json({ token, user });
+    res.json({
+      token,
+      user: {
+        id: user._id,
+        email: user.email,
+        role: user.role
+      }
+    });
 
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "Server error" });
   }
 };
 
-/* ---------------- EXPORT ---------------- */
 module.exports = { register, login };

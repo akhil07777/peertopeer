@@ -8,6 +8,7 @@ function AdminDashboard(){
 const navigate = useNavigate();
 
 const [users,setUsers] = useState([]);
+const [pendingUsers,setPendingUsers] = useState([]); // ✅ NEW
 const [feedback,setFeedback] = useState([]);
 const [selectedUser,setSelectedUser] = useState(null);
 const [profileRating,setProfileRating] = useState(null);
@@ -18,9 +19,6 @@ feedbacks:0,
 requests:0
 });
 
-
-
-/* LOAD STATS */
 /* LOAD USERS */
 
 useEffect(()=>{
@@ -38,7 +36,7 @@ headers:{Authorization:`Bearer ${token}`}
 /* REMOVE ADMIN USER */
 
 const filteredUsers = res.data.filter(
-user => user.email !== "admin123@gmail.com"
+user => user.email !== "[admin123@gmail.com](mailto:admin123@gmail.com)"
 );
 setUsers(filteredUsers);
 
@@ -46,6 +44,7 @@ setStats(prev => ({
 ...prev,
 users: filteredUsers.length
 }));
+
 }catch(error){
 
 console.log("Users fetch error");
@@ -58,6 +57,31 @@ fetchUsers();
 
 },[]);
 
+/* LOAD PENDING USERS */
+
+useEffect(()=>{
+
+const fetchPending = async ()=>{
+
+try{
+
+const token = localStorage.getItem("token");
+
+const res = await api.get("/admin/pending-users",{
+headers:{Authorization:`Bearer ${token}`}
+});
+
+setPendingUsers(res.data);
+
+}catch(error){
+console.log("Pending users fetch error");
+}
+
+};
+
+fetchPending();
+
+},[]);
 
 /* LOAD REQUESTS */
 
@@ -87,7 +111,6 @@ console.log("Requests fetch error");
 fetchRequests();
 
 },[]);
-
 
 /* LOAD FEEDBACK */
 
@@ -120,7 +143,49 @@ fetchFeedback();
 
 },[]);
 
-/* DELETE USER */
+/* APPROVE USER */
+
+const approveUser = async(id)=>{
+
+try{
+
+const token = localStorage.getItem("token");
+
+await api.put(`/admin/approve/${id}`,{},{
+headers:{Authorization:`Bearer ${token}`}
+});
+
+setPendingUsers(prev => prev.filter(u => u._id !== id));
+
+alert("User approved");
+
+}catch(error){
+console.log("Approve error");
+}
+
+};
+
+/* REJECT USER */
+
+const rejectUser = async(id)=>{
+
+try{
+
+const token = localStorage.getItem("token");
+
+await api.delete(`/admin/reject/${id}`,{
+headers:{Authorization:`Bearer ${token}`}
+});
+
+setPendingUsers(prev => prev.filter(u => u._id !== id));
+
+alert("User rejected");
+
+}catch(error){
+console.log("Reject error");
+}
+
+};
 
 /* DELETE USER */
 
@@ -154,6 +219,7 @@ console.log("Delete error");
 }
 
 };
+
 /* DELETE FEEDBACK */
 
 const deleteFeedback = async(id)=>{
@@ -175,10 +241,6 @@ console.log("Delete feedback error");
 }
 
 };
-
-
-
-
 
 /* OPEN PROFILE */
 
@@ -269,6 +331,45 @@ marginBottom:"40px"
 </div>
 
 </div>
+
+{/* 🔥 PENDING USERS */}
+
+<h2 style={{textAlign:"center"}}>Pending Users</h2>
+
+<table className="admin-table">
+
+<thead>
+<tr>
+<th>Email</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+{pendingUsers.map(u=>(
+
+<tr key={u._id}>
+
+<td>{u.email}</td>
+
+<td>
+
+<button className="btn" onClick={()=>approveUser(u._id)}>
+Approve </button>
+
+<button className="delete-btn" onClick={()=>rejectUser(u._id)}>
+Reject </button>
+
+</td>
+
+</tr>
+
+))}
+
+</tbody>
+
+</table>
 
 {/* USERS TABLE */}
 
@@ -422,6 +523,7 @@ onClick={(e)=>e.stopPropagation()}
 <p>
 <strong>Bio:</strong>
 </p>
+
 <p className="bio-text">
 
 {selectedUser?.bio
@@ -435,6 +537,7 @@ const lower = value.toLowerCase();
 
 if(lower.includes("@")){
 return(
+
 <div key={index}>
 <strong>{label} - </strong>
 <a href={`mailto:${value}`} className="bio-link">
@@ -446,6 +549,7 @@ return(
 
 if(lower.includes("github")){
 return(
+
 <div key={index}>
 <strong>{label} - </strong>
 <a href={`https://${value.replace("https://","").replace("http://","")}`}
@@ -460,6 +564,7 @@ View
 
 if(lower.includes("linkedin")){
 return(
+
 <div key={index}>
 <strong>{label} - </strong>
 <a href={`https://${value.replace("https://","").replace("http://","")}`}
@@ -474,6 +579,7 @@ View Profile
 
 if(lower.includes("http") || lower.includes("www")){
 return(
+
 <div key={index}>
 <strong>{label} - </strong>
 <a href={value} target="_blank" rel="noreferrer" className="bio-link">
@@ -491,6 +597,7 @@ return <div key={index}>{line}</div>;
 :"No bio available"}
 
 </p>
+
 {profileRating && profileRating.count>0 &&(
 
 <div className="rating-breakdown">
