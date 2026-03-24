@@ -71,11 +71,16 @@ setConnections(prev=>prev.filter(c=>c._id!==id));
 useEffect(()=>{
 
 Talk.ready.then(()=>{
-
 const me = new Talk.User({
-id: currentUser._id,
-name: currentUser.name,
-email: currentUser.email || "user@email.com"
+  id: String(currentUser._id),
+  name: currentUser.name,
+  email: currentUser.email || "user@email.com"
+});
+
+const other = new Talk.User({
+  id: String(chatUser._id),
+  name: chatUser.name,
+  email: chatUser.email || "user@email.com"
 });
 
 const session = new Talk.Session({
