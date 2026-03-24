@@ -133,6 +133,26 @@ const unreadCount = notifications.filter(n => !n.isRead).length;
     fetchNotifications();
   }, []);
 
+
+ // Polling: fetch notifications every 5 seconds for near real-time updates
+
+useEffect(() => {
+  const interval = setInterval(async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await api.get("/notifications", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      setNotifications(res.data);
+
+    } catch (err) {
+      console.log("Auto notification fetch error");
+    }
+  }, 5000); // every 5 sec
+
+  return () => clearInterval(interval);
+}, []);
   /* ---- FETCH PROFILE RATING ---- */
   useEffect(() => {
     const fetchProfileRating = async () => {
@@ -223,7 +243,29 @@ const unreadCount = notifications.filter(n => !n.isRead).length;
           </button>
           <button
   className="request-btn"
-  onClick={() => setShowNotifications(!showNotifications)}
+ onClick={async () => {
+  setShowNotifications(!showNotifications);
+
+  const token = localStorage.getItem("token");
+
+  try {
+    await Promise.all(
+      notifications.map(n =>
+        api.put(`/notifications/read/${n._id}`, {}, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+      )
+    );
+
+    // update UI instantly
+    setNotifications(prev =>
+      prev.map(n => ({ ...n, isRead: true }))
+    );
+
+  } catch (err) {
+    console.log("Notification update error");
+  }
+}}
 >
   🔔 {unreadCount > 0 && `(${unreadCount})`}
 </button>
@@ -368,15 +410,16 @@ const unreadCount = notifications.filter(n => !n.isRead).length;
       {showNotifications && (
   <div style={{
     position: "absolute",
-    right: "20px",
-    top: "70px",
-    background: "#1e293b",
-    padding: "10px",
-    borderRadius: "10px",
-    width: "280px",
-    maxHeight: "300px",
-    overflowY: "auto",
-    zIndex: 1000
+  left: "50%",
+  transform: "translateX(-50%)",
+  top: "70px",
+  background: "#1e293b",
+  padding: "10px",
+  borderRadius: "10px",
+  width: "280px",
+  maxHeight: "300px",
+  overflowY: "auto",
+  zIndex: 1000
   }}>
     <h4>Notifications</h4>
 
@@ -384,16 +427,18 @@ const unreadCount = notifications.filter(n => !n.isRead).length;
       <p>No notifications</p>
     ) : (
       notifications.map(n => (
-        <div
-          key={n._id}
-          style={{
-            padding: "8px",
-            borderBottom: "1px solid #334155"
-          }}
-        >
-          {n.message}
-        </div>
-      ))
+  <div
+    key={n._id}
+    style={{
+      padding: "10px",
+      borderBottom: "1px solid #334155",
+      fontWeight: n.isRead ? "normal" : "bold",
+      color: n.isRead ? "#94a3b8" : "#fff"
+    }}
+  >
+    {n.message}
+  </div>
+))
     )}
   </div>
 )}
