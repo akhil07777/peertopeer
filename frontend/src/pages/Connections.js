@@ -72,16 +72,11 @@ useEffect(()=>{
 
 Talk.ready.then(()=>{
 const me = new Talk.User({
-  id: String(currentUser._id),
-  name: currentUser.name,
-  email: currentUser.email || "user@email.com"
+  id: String(currentUser?._id || "guest"),
+  name: currentUser?.name?.trim() || "User",
+  email: currentUser?.email || "user@email.com"
 });
 
-const other = new Talk.User({
-  id: String(chatUser._id),
-  name: chatUser.name,
-  email: chatUser.email || "user@email.com"
-});
 
 const session = new Talk.Session({
 appId:"tbJhxgLH",
@@ -118,10 +113,10 @@ useEffect(()=>{
 if(!chatUser || !sessionRef.current) return;
 
 const me = sessionRef.current.me;
-
 const other = new Talk.User({
-id: chatUser._id,
-name: chatUser.name
+  id: String(chatUser?._id || "unknown"),
+  name: chatUser?.name?.trim() || "User",
+  email: chatUser?.email || "user@email.com"
 });
 
 const conversationId = Talk.oneOnOneId(me,other);
