@@ -118,20 +118,25 @@ const unreadCount = notifications.filter(n => !n.isRead).length;
   }, []);
 
   /* ---- FETCH NOTIFICATIONS ---- */
-  useEffect(() => {
-    const fetchNotifications = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const res = await api.get("/notifications", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setNotifications(res.data);
-      } catch (error) {
-        console.error("Notification fetch error:", error);
-      }
-    };
-    fetchNotifications();
-  }, []);
+useEffect(() => {
+
+  const fetchNotifications = async () => {
+    const token = localStorage.getItem("token");
+
+    const res = await api.get("/notifications", {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    setNotifications(res.data);
+  };
+
+  fetchNotifications();
+
+  const interval = setInterval(fetchNotifications, 5000);
+
+  return () => clearInterval(interval);
+
+}, []);
 
 
  // Polling: fetch notifications every 5 seconds for near real-time updates
