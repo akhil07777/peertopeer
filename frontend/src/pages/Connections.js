@@ -84,6 +84,10 @@ const session = new Talk.Session({
   appId: "tbJhxgLH",
   me: me
 });
+
+sessionRef.current = session;
+
+/* MESSAGE LISTENER */
 session.on("message", event => {
 
   const senderId = String(event.data.senderId);
