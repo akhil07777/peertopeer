@@ -84,23 +84,23 @@ const session = new Talk.Session({
   appId: "tbJhxgLH",
   me: me
 });
-
-sessionRef.current = session;
-
-/* MESSAGE LISTENER */
-
-session.on("message", (event) => {
+session.on("message", event => {
 
   const senderId = String(event.data.senderId);
   const myId = String(currentUser?._id);
 
   if (senderId !== myId) {
+
     const convoId = event.data.conversation.id;
 
+    // 🔔 increase unread count
     setUnread(prev => ({
       ...prev,
       [convoId]: (prev[convoId] || 0) + 1
     }));
+
+    // 📩 simple notification
+    alert("New message received");
   }
 
 });
