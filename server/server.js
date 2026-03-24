@@ -7,7 +7,7 @@ const dns = require("dns");
 const notificationRoutes = require("./routes/notificationRoutes");
 const feedbackRoutes = require("./routes/feedback");
 const adminRoutes = require("./routes/adminRoutes");
-const notificationRoutes = require("./routes/notificationRoutes");
+
 
 
 
