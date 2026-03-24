@@ -3,7 +3,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const Feedback = require("../models/Feedback");
 const Request = require("../models/Request");
-const Notification = require("../models/Notification"); // ✅ NEW
+const Notification = require("../models/Notifications"); // ✅ NEW
 
 const authMiddleware = require("../middleware/authMiddleware");
 const adminMiddleware = require("../middleware/adminMiddleware");
