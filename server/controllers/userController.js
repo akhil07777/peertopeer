@@ -2,72 +2,78 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-/* REGISTER */
+/* ---------------- REGISTER ---------------- */
+
 const register = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+try {
+const { email, password, name } = req.body;
 
-    const cleanEmail = email.trim().toLowerCase();
+```
+const cleanEmail = email.trim().toLowerCase();
 
-    const hashed = await bcrypt.hash(password, 10);
+const hashed = await bcrypt.hash(password, 10);
 
-    const user = await User.create({
-      email: cleanEmail,
-      password: hashed,
-      isApproved: false
-    });
+const user = await User.create({
+  email: cleanEmail,
+  password: hashed,
+  name: name || "User",          // ✅ FIX: store name
+  isApproved: false
+});
 
-    res.json({
-      message: "Registered successfully. Wait for admin approval"
-    });
+res.json({
+  message: "Registered successfully. Wait for admin approval"
+});
+```
 
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
+} catch (error) {
+res.status(400).json({ error: error.message });
+}
 };
 
-/* LOGIN */
+/* ---------------- LOGIN ---------------- */
+
 const login = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+try {
+const { email, password } = req.body;
 
-    const cleanEmail = email.trim().toLowerCase();
 
-    const user = await User.findOne({ email: cleanEmail });
+const cleanEmail = email.trim().toLowerCase();
 
-    if (!user) {
-      return res.status(400).json({ message: "User not found" });
-    }
+const user = await User.findOne({ email: cleanEmail });
 
-    if (!user.isApproved) {
-      return res.status(403).json({
-        message: "Your account is waiting for admin approval"
-      });
-    }
+if (!user) {
+  return res.status(400).json({ message: "User not found" });
+}
 
-    const isMatch = await bcrypt.compare(password, user.password);
+if (!user.isApproved) {
+  return res.status(403).json({
+    message: "Your account is waiting for admin approval"
+  });
+}
 
-    if (!isMatch) {
-      return res.status(400).json({ message: "Wrong password" });
-    }
+const isMatch = await bcrypt.compare(password, user.password);
 
-    const token = jwt.sign(
-      { id: user._id, role: user.role },
-      process.env.JWT_SECRET
-    );
+if (!isMatch) {
+  return res.status(400).json({ message: "Wrong password" });
+}
 
-    res.json({
-      token,
-      user: {
-        id: user._id,
-        email: user.email,
-        role: user.role
-      }
-    });
+const token = jwt.sign(
+  { id: user._id, role: user.role },
+  process.env.JWT_SECRET
+);
 
-  } catch (error) {
-    res.status(500).json({ message: "Server error" });
+res.json({
+  token,
+  user: {
+    _id: user._id,              // ✅ FIX: use _id (important)
+    email: user.email,
+    name: user.name || "User", // ✅ FIX: send name
+    role: user.role
   }
+});
+} catch (error) {
+res.status(500).json({ message: "Server error" });
+}
 };
 
 module.exports = { register, login };
