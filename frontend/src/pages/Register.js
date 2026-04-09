@@ -25,15 +25,15 @@ function Register() {
       await api.post("/users/register", form);
       alert("Registration Successful 🚀");
       navigate("/login");
-    } catch (error) {
-  console.log(error); // 👈 see full error in console
+    }catch (error) {
+  console.log("FULL ERROR:", error);
+  console.log("BACKEND RESPONSE:", error.response);
 
-  const message =
-    error.response?.data?.message ||
-    error.message ||
-    "Registration Failed";
-
-  alert(message);
+  if (error.response && error.response.data) {
+    alert(error.response.data.message || JSON.stringify(error.response.data));
+  } else {
+    alert("Something went wrong");
+  }
 }
   };
   
