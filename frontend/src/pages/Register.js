@@ -6,7 +6,8 @@ import "../styles/Auth.css";
 function Register() {
   const navigate = useNavigate();
 
- const [form, setForm] = useState({
+const [form, setForm] = useState({
+  name: "",
   email: "",
   password: ""
 });
@@ -45,6 +46,12 @@ function Register() {
 
         <form onSubmit={handleSubmit}>
          
+         <input
+  name="name"
+  placeholder="Name"
+  onChange={handleChange}
+  required
+/>
 
           <input
             name="email"
