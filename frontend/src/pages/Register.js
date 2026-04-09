@@ -26,8 +26,15 @@ function Register() {
       alert("Registration Successful 🚀");
       navigate("/login");
     } catch (error) {
-      alert("Registration Failed");
-    }
+  console.log(error); // 👈 see full error in console
+
+  const message =
+    error.response?.data?.message ||
+    error.message ||
+    "Registration Failed";
+
+  alert(message);
+}
   };
   
 
