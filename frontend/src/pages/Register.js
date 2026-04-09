@@ -12,32 +12,36 @@ const [form, setForm] = useState({
   password: ""
 });
 
- const handleChange = (e) => {
+const handleChange = (e) => {
   setForm({
     ...form,
-    [e.target.name]: e.target.value.trim()
+    [e.target.name]: e.target.value // ❌ remove trim here
   });
 };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      await api.post("/users/register", form);
-      alert("Registration Successful 🚀");
-      navigate("/login");
-    }catch (error) {
-  console.log("FULL ERROR:", error);
-  console.log("BACKEND RESPONSE:", error.response);
+  try {
+    const res = await api.post("/users/register", form);
 
-  if (error.response && error.response.data) {
-    alert(error.response.data.message || JSON.stringify(error.response.data));
-  } else {
-    alert("Something went wrong");
+    alert(res.data.message || "Registration Successful 🚀");
+
+    navigate("/login");
+
+  } catch (error) {
+    console.log("FULL ERROR:", error);
+    console.log("BACKEND RESPONSE:", error.response);
+
+    const message =
+      error.response?.data?.message ||
+      error.response?.data?.error ||
+      error.message ||
+      "Something went wrong";
+
+    alert(message);
   }
-}
-  };
-  
+};
 
   return (
     <div className="auth-container">
