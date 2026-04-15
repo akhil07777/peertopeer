@@ -1,195 +1,204 @@
-# Skill Swap – Peer-to-Peer Skill Exchange Platform
+Here is your clean professional README without emojis, suitable for GitHub submission:
 
-## Project Overview
-
-Skill Swap is a web-based platform designed to enable users to exchange skills with one another without any monetary transactions. Instead of paying for courses, users can both teach and learn by connecting with others who have complementary skills.
-
-The platform creates a collaborative learning environment, encouraging knowledge sharing, community interaction, and personal skill development.
 
 ---
 
-## Features
+Skill Swap – Peer-to-Peer Skill Exchange Platform
 
-* User authentication with secure registration and login
-* Profile management for updating personal details and skills
-* Dashboard to explore users and available skills
-* Skill request system to send, accept, and reject requests
-* Connections established after request acceptance
-* Real-time chat using TalkJS
-* Request history tracking (pending, accepted, rejected)
-* Feedback system for user reviews
-* Admin dashboard for monitoring platform activity
+Project Overview
+
+Skill Swap is a web-based platform that enables users to exchange skills without any monetary transactions. Instead of paying for courses, users can both teach and learn by connecting with others who have complementary skills.
+
+The platform promotes collaborative learning, community interaction, and personal skill development.
+
 
 ---
 
-## Tech Stack
+Features
 
-### Frontend
+Secure user authentication using JWT
 
-* React.js
-* HTML
-* CSS
-* JavaScript
+Profile management for updating personal details and skills
 
-### Backend
+Dashboard to explore users and available skills
 
-* Node.js
-* Express.js
+Skill request system (send, accept, reject)
 
-### Database
+Connection establishment after request acceptance
 
-* MongoDB
+Real-time chat using TalkJS
 
-### Other Tools and Technologies
+Request history tracking (pending, accepted, rejected)
 
-* JWT Authentication
-* REST APIs
-* TalkJS (chat integration)
-* Git and GitHub
+Feedback and rating system
 
----
+Admin dashboard for monitoring activities
 
-## Project Structure
+Admin verification required before user login
 
-### Frontend
 
-```id="p3m9av"
-frontend/
-│
-├── public/              # Static files (index.html, icons, manifest)
-├── build/               # Production-ready optimized files
-├── src/
-│   ├── components/      # Reusable components (Chat)
-│   ├── pages/           # Application pages (Dashboard, Profile, etc.)
-│   ├── styles/          # CSS files
-│   ├── App.js           # Routing configuration
-│   └── index.js         # Entry point
-```
-
-### Backend
-
-```id="f0t3e6"
-server/
-│
-├── controllers/         # Business logic
-├── middleware/          # Authentication and authorization
-├── models/              # Database schemas
-├── routes/              # API endpoints
-├── server.js            # Backend entry point
-└── .env                 # Environment variables
-```
 
 ---
 
-## How It Works
-
-1. Users register and log into the platform
-2. Users explore available skills and other users
-3. A user sends a skill exchange request
-4. The recipient accepts or rejects the request
-5. If accepted, both users become connected
-6. Users communicate through chat using TalkJS
-7. Skill exchange takes place
-8. Users provide feedback after completion
-
----
-
-## Environment Variables
-
-Create a .env file inside the server folder and add:
-
-```id="olbkrb"
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-```
-
----
-
-## Installation and Setup
-
-### 1. Clone the repository
-
-```id="u11bgm"
-git clone https://github.com/your-username/skill-swap.git
-cd skill-swap
-```
-
-### 2. Install dependencies
-
-Backend
-
-```id="8ruxy2"
-cd server
-npm install
-```
+Tech Stack
 
 Frontend
 
-```id="dr8c2k"
-cd frontend
-npm install
-```
+React.js
 
-### 3. Run the application
+HTML
 
-Start backend server
+CSS
 
-```id="nf0bwo"
-cd server
-npm start
-```
+JavaScript
 
-Start frontend
 
-```id="0mm6cz"
-cd frontend
-npm start
-```
+Backend
 
----
+Node.js
 
-## Deployment
+Express.js
 
-The application can be deployed using:
 
-* Backend: Render
-* Frontend: Netlify or Vercel
+Database
 
-Ensure environment variables are properly configured during deployment.
+MongoDB
 
----
 
-## Future Improvements
+Other Technologies
 
-* Real-time notification system
-* Skill scheduling and session management
-* Video call integration
-* Advanced admin analytics dashboard
-* Improved mobile responsiveness
+JWT Authentication
+
+REST APIs
+
+TalkJS (chat integration)
+
+Git and GitHub
+
+
 
 ---
 
-## Team Contribution
+Project Structure
 
-This project was developed collaboratively by a team of 5 members, with all members actively contributing to different aspects of the system.
+Frontend
 
-* Contributed to frontend and backend development
-* Participated in UI design and user experience improvements
-* Worked on API development and database integration
-* Assisted in implementing features such as skill requests, connections, and chat
-* Involved in testing, debugging, and performance improvements
-* Supported deployment and final project presentation
+frontend/
+│
+├── public/              # Static files
+├── build/               # Production build
+├── src/
+│   ├── components/      # Reusable UI components
+│   ├── pages/           # Application pages
+│   ├── styles/          # CSS files
+│   ├── App.js           # Routing
+│   └── index.js         # Entry point
 
-All team members worked together across multiple modules to ensure the successful completion of the project.
-
----
-
-## License
-
-This project is developed for educational purposes only.
 
 ---
 
-## Acknowledgment
+Backend
 
-We thank our mentors and institution for their guidance and support throughout the development of this project.
+server/
+│
+├── controllers/         # Business logic
+├── middleware/          # Authentication middleware
+├── models/              # Database schemas
+├── routes/              # API endpoints
+├── server.js            # Main server file
+└── .env                 # Environment variables
+
+
+---
+
+Working Flow
+
+1. User registers on the platform
+
+
+2. Admin verifies the user account
+
+
+3. User logs in after approval
+
+
+4. User explores available skills and profiles
+
+
+5. User sends a skill exchange request
+
+
+6. Receiver accepts or rejects the request
+
+
+7. If accepted, a connection is established
+
+
+8. Users communicate through TalkJS chat
+
+
+9. Skill exchange takes place
+
+
+10. Users provide feedback after completion
+
+
+
+
+---
+
+Authentication Flow
+
+User submits login credentials from frontend
+
+Backend validates credentials
+
+Backend checks admin approval status
+
+If valid, JWT token is generated
+
+Token is sent to frontend
+
+Frontend includes token in API requests
+
+Middleware verifies token for protected routes
+
+
+
+---
+
+Future Enhancements
+
+Video call integration
+
+AI-based skill recommendation system
+
+Notification system
+
+Mobile application support
+
+
+
+---
+
+Contributors
+
+Add team member names here
+
+
+---
+
+License
+
+This project is developed for educational purposes.
+
+
+---
+
+If you want, I can next:
+
+Convert this into a short 1-page version for record submission
+
+Add GitHub badges and screenshots section
+
+Prepare a perfect viva explanation from this README
