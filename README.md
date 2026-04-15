@@ -1,204 +1,105 @@
-Here is your clean professional README without emojis, suitable for GitHub submission:
+# SKILL SWAP – PEER-TO-PEER SKILL EXCHANGE PLATFORM
+
+## PROJECT OVERVIEW
+Skill Swap is a web-based platform where users can share and learn skills by connecting with each other. Users can showcase their skills, explore others, and interact through a structured system.
+
+The platform supports collaborative learning and helps users improve their skills through peer interaction.
 
 
----
-
-Skill Swap – Peer-to-Peer Skill Exchange Platform
-
-Project Overview
-
-Skill Swap is a web-based platform that enables users to exchange skills without any monetary transactions. Instead of paying for courses, users can both teach and learn by connecting with others who have complementary skills.
-
-The platform promotes collaborative learning, community interaction, and personal skill development.
-
-
----
-
-Features
-
-Secure user authentication using JWT
-
-Profile management for updating personal details and skills
-
-Dashboard to explore users and available skills
-
-Skill request system (send, accept, reject)
-
-Connection establishment after request acceptance
-
-Real-time chat using TalkJS
-
-Request history tracking (pending, accepted, rejected)
-
-Feedback and rating system
-
-Admin dashboard for monitoring activities
-
-Admin verification required before user login
+## FEATURES
+- Secure user authentication using JWT  
+- Profile management (skills, personal details)  
+- Dashboard to explore users and skills  
+- Skill request system (send, accept, reject)  
+- Connection system after request approval  
+- Real-time chat using TalkJS  
+- Request history tracking  
+- Feedback and rating system  
+- Admin dashboard for monitoring  
+- Admin verification before login  
 
 
+## TECH STACK
 
----
+### FRONTEND
+- React.js  
+- HTML  
+- CSS  
+- JavaScript  
 
-Tech Stack
+### BACKEND
+- Node.js  
+- Express.js  
 
-Frontend
+### DATABASE
+- MongoDB  
 
-React.js
-
-HTML
-
-CSS
-
-JavaScript
-
-
-Backend
-
-Node.js
-
-Express.js
-
-
-Database
-
-MongoDB
+### OTHER TECHNOLOGIES
+- JWT Authentication  
+- REST APIs  
+- TalkJS  
+- Git & GitHub  
 
 
-Other Technologies
+## PROJECT STRUCTURE
 
-JWT Authentication
-
-REST APIs
-
-TalkJS (chat integration)
-
-Git and GitHub
-
-
-
----
-
-Project Structure
-
-Frontend
-
+### FRONTEND
 frontend/
 │
-├── public/              # Static files
-├── build/               # Production build
-├── src/
-│   ├── components/      # Reusable UI components
-│   ├── pages/           # Application pages
-│   ├── styles/          # CSS files
-│   ├── App.js           # Routing
-│   └── index.js         # Entry point
+├── public/              # Static files  
+├── build/               # Production build  
+├── src/  
+│   ├── components/      # Reusable components  
+│   ├── pages/           # Pages (Dashboard, Profile, etc.)  
+│   ├── styles/          # CSS files  
+│   ├── App.js           # Routing  
+│   └── index.js         # Entry point  
 
 
----
-
-Backend
-
+### BACKEND
 server/
 │
-├── controllers/         # Business logic
-├── middleware/          # Authentication middleware
-├── models/              # Database schemas
-├── routes/              # API endpoints
-├── server.js            # Main server file
-└── .env                 # Environment variables
+├── controllers/         # Business logic  
+├── middleware/          # Authentication middleware  
+├── models/              # Database schemas  
+├── routes/              # API endpoints  
+├── server.js            # Main server  
+└── .env                 # Environment variables  
 
 
----
-
-Working Flow
-
-1. User registers on the platform
-
-
-2. Admin verifies the user account
-
-
-3. User logs in after approval
-
-
-4. User explores available skills and profiles
+## WORKING FLOW
+1. User registers on the platform  
+2. Admin verifies the account  
+3. User logs in after approval  
+4. User explores skills and profiles  
+5. User sends a skill exchange request  
+6. Receiver accepts or rejects  
+7. If accepted, connection is established  
+8. Users communicate via TalkJS  
+9. Skill exchange happens  
+10. Feedback is provided  
 
 
-5. User sends a skill exchange request
+## AUTHENTICATION FLOW
+- User sends login request  
+- Backend validates credentials  
+- Backend checks admin approval  
+- JWT token is generated  
+- Token sent to frontend  
+- Frontend attaches token in requests  
+- Middleware verifies token  
 
 
-6. Receiver accepts or rejects the request
+## FUTURE ENHANCEMENTS
+- Video call integration  
+- AI-based skill recommendation  
+- Notification system  
+- Mobile app support  
 
 
-7. If accepted, a connection is established
+## CONTRIBUTORS
+- Add team member names here  
 
 
-8. Users communicate through TalkJS chat
-
-
-9. Skill exchange takes place
-
-
-10. Users provide feedback after completion
-
-
-
-
----
-
-Authentication Flow
-
-User submits login credentials from frontend
-
-Backend validates credentials
-
-Backend checks admin approval status
-
-If valid, JWT token is generated
-
-Token is sent to frontend
-
-Frontend includes token in API requests
-
-Middleware verifies token for protected routes
-
-
-
----
-
-Future Enhancements
-
-Video call integration
-
-AI-based skill recommendation system
-
-Notification system
-
-Mobile application support
-
-
-
----
-
-Contributors
-
-Add team member names here
-
-
----
-
-License
-
+## LICENSE
 This project is developed for educational purposes.
-
-
----
-
-If you want, I can next:
-
-Convert this into a short 1-page version for record submission
-
-Add GitHub badges and screenshots section
-
-Prepare a perfect viva explanation from this README
