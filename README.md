@@ -98,8 +98,11 @@ server/
 
 
 ## CONTRIBUTORS
-- Add team member names here  
-
+- Adarsh P S
+- Ajisha B
+- Ajith Biju
+- Akhil A Anand
+- Akshay Subhash
 
 ## LICENSE
 This project is developed for educational purposes.
