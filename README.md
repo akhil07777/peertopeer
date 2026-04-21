@@ -1,4 +1,4 @@
-# SKILL SWAP – PEER-TO-PEER SKILL EXCHANGE PLATFORM
+#SKILL SWAP – PEER-TO-PEER SKILL EXCHANGE PLATFORM
 
 ## PROJECT OVERVIEW
 Skill Swap is a web-based platform where users can share and learn skills by connecting with each other. Users can showcase their skills, explore others, and interact through a structured system.
