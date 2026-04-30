@@ -98,11 +98,11 @@ server/
 
 
 ## CONTRIBUTORS
-- 
-- 
--
+- Adarsh
+- Ajisha
+- Ajith
 - Akhil A Anand
-- 
+- Akshay
 
 ## LICENSE
 This project is developed for educational purposes.
